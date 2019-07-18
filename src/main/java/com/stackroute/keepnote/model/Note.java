@@ -1,5 +1,7 @@
 package com.stackroute.keepnote.model;
 
+import org.springframework.stereotype.Component;
+
 import java.lang.*;
 
 import java.time.LocalDateTime;
@@ -7,8 +9,8 @@ import java.time.LocalDateTime;
 /*
  * The class "Note" will be acting as the data model for the Note data in the ArrayList.
  */
+@Component
 public class Note {
-
 	/*
 	 * This class should have five fields (noteId, noteTitle, noteContent,
 	 * noteStatus and createdAt). This class should also contain the getters and
@@ -23,7 +25,6 @@ public class Note {
 
 	public Note() {
 	}
-
 	/* All the getters/setters definition should be implemented here */
 
 	public int getNoteId() {

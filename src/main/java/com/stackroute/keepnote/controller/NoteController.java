@@ -2,8 +2,12 @@ package com.stackroute.keepnote.controller;
 
 import com.stackroute.keepnote.model.Note;
 import com.stackroute.keepnote.repository.NoteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +22,8 @@ import java.util.List;
  * any POJO class as a controller so that Spring can recognize this class as a Controller
  * */
 @Controller
-public class NoteController {
+public class NoteController
+{
 	/*
 	 * From the problem statement, we can understand that the application
 	 * requires us to implement the following functionalities.
@@ -29,19 +34,17 @@ public class NoteController {
 	 * 3. Delete an existing note.
 	 * 4. Update an existing note.
 	 */
-
 	/*
 	 * Get the application context from resources/beans.xml file using ClassPathXmlApplicationContext() class.
 	 * Retrieve the Note object from the context.
 	 * Retrieve the NoteRepository object from the context.
 	 */
-	ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-	Note note=context.getBean(Note.class);
-	NoteRepository noteRepository=context.getBean(NoteRepository.class);
-
+	@Autowired
+    NoteRepository noteRepository;
 	/*Define a handler method to read the existing notes by calling the getAllNotes() method
 	 * of the NoteRepository class and add it to the ModelMap which is an implementation of Map
 	 * for use when building model data for use with views. it should map to the default URL i.e. "/" */
+
 	@RequestMapping("/")
 	public String addNote(ModelMap model)
 	{
@@ -68,7 +71,7 @@ public class NoteController {
 		}else if(noteRepository.exists(noteId)) {
 			model.addAttribute("error","Note ID already exists");
 		}else {
-			Note note1 = (Note) context.getBean("note");
+			Note note1 = new Note();
 			note1.setCreatedAt(LocalDateTime.now());
 			note1.setNoteId(noteId);
 			note1.setNoteTitle(noteTitle);

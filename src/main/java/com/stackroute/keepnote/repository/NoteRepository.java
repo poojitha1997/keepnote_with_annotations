@@ -1,6 +1,8 @@
 package com.stackroute.keepnote.repository;
 
 import com.stackroute.keepnote.model.Note;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
  * as Controllers and Test Cases
  * */
 
+@Repository
 public class NoteRepository {
 
 	/* Declare a variable called "list" to store all the notes. */
@@ -30,7 +33,7 @@ public class NoteRepository {
 	}
 
 	/* This method should set the list variable with new list of notes */
-
+    @Autowired
 	public void setList(List<Note> list) {
 		this.list=list;
 
